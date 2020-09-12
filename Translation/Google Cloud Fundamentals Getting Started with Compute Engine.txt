@@ -1,0 +1,37 @@
+Google Cloud Fundamentals: Getting Started with Compute Engine
+
+Objectives
+In this lab, you will learn how to perform the following tasks:
+
+Create a Compute Engine virtual machine using the Google Cloud Platform (GCP) Console.
+
+Create a Compute Engine virtual machine using the gcloud command-line interface.
+
+Connect between the two instances.
+
+#####################################
+STEPS
+1- gcloud computr instances create my-vm-1 --machine-type  "n1-standard-1" --image-project "debian-cloud" --image "debian-9-stretch-v20190213 -- subnet "default" --tags http
+
+gcloud compute firewall-rules create allow-http --action=ALLOW --destination = INGRESS --rules =http:80 --target-tags=http
+
+2-gcloud config set compute/zone us-central1-b
+gcloud compute instances create "my-vm-2" \
+--machine-type "n1-standard-1" \
+--image-project "debian-cloud" \
+--image "debian-9-stretch-v20190213" \
+--subnet "default"
+
+3- gcloud compute ssh my-vm-2
+   ping -c 4 my-vm-1
+   ssh my-vm-1
+   sudo apt-get install nginx-light -y
+   sudo nano /var/www/html/index.nginx-debian.html
+   Hi from Fadhlurahman
+   curl http://localhost/
+   exit
+
+   curl http://my-vm-1/
+
+4- gcloud compute instances list --zone us central1-b
+
